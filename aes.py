@@ -13,7 +13,6 @@ def chiffrement_aes(data, key, iv):
 
 def dechiffrement_aes(ct, key, iv):
     try:
-        
         cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
         decryptor = cipher.decryptor()
         padded_data = decryptor.update(b64decode(ct)) + decryptor.finalize()

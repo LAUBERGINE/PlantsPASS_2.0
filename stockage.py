@@ -1,4 +1,5 @@
 from chiffrement import aes, daes
+
 class Stockage:
     def __init__(self, site, identifiant, password):
         self.site = site
@@ -9,11 +10,6 @@ class Stockage:
         print(f"Site : {self.site}")
         print(f"Identifiant : {self.identifiant}")
         print(f"Password : {daes(master, self.password)}")
-
-    def save(self):
-        fichier = open('plantPass.egplt', 'a')
-        fichier.write(f"{self.site};{self.identifiant};{self.password}\n")
-        fichier.close()
 
 def genVar(master):
     site = input("Site: ")
@@ -32,3 +28,11 @@ def load(stock):
         pass 
     except:
         pass
+    
+def save(obj, stock, temp_stock):
+    for temp_stock in stock:
+        if temp_stock.site == obj.site and temp_stock.identifiant == obj.identifiant:
+            return
+        fichier = open('plantPass.egplt', 'a')
+        fichier.write(f"{obj.site};{obj.identifiant};{obj.password}\n")
+        fichier.close()

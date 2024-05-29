@@ -1,14 +1,13 @@
-from stockage import genVar, load
+from stockage import genVar, load, save
 from hachage import sha512
 
 stock = []
-
+temp_stock = []
 load(stock)
-
 master = sha512(input("Password : "))
 
-stock.append(genVar(master))
+temp_stock.append(genVar(master))
 
 for i in stock:
-    i.save()
+    save(i, stock, temp_stock)
     i.view_stockage(master)
