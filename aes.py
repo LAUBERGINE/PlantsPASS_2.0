@@ -12,10 +12,14 @@ def chiffrement_aes(data, key, iv):
     return b64encode(ct).decode('utf-8')
 
 def dechiffrement_aes(ct, key, iv):
-    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
-    decryptor = cipher.decryptor()
-    padded_data = decryptor.update(b64decode(ct)) + decryptor.finalize()
-    unpadder = PKCS7(algorithms.AES.block_size).unpadder()
-    data = unpadder.update(padded_data) + unpadder.finalize()
-    return data.decode('utf-8')
+    try:
+        
+        cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+        decryptor = cipher.decryptor()
+        padded_data = decryptor.update(b64decode(ct)) + decryptor.finalize()
+        unpadder = PKCS7(algorithms.AES.block_size).unpadder()
+        data = unpadder.update(padded_data) + unpadder.finalize()
+        return data.decode('utf-8')
+    except:
+        return "*****************"
 
